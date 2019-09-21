@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <script src="/mqtt.js"></script>
+  </head>
+  <body>
+   <object  type='application/x-vlc-plugin' id='RTSP'  width="704" height="576" events='True' pluginspage="http://www.videolan.org" codebase="http://downloads.videolan.org/pub/videolan/vlc-webplugins/2.0.6/npapi-vlc-2.0.6.tar.xz" >
+         <param name='mrl' value='rtsp://192.168.1.164:554/user=admin&password=&channel=1&stream=1.sdp?' />
+         <param name='autoplay' value='true' />
+         <param name='loop' value='false' />
+         <param value="transparent" name="wmode" /> 
+     </object >
+    <div id="message"/>
+  </body>
+  <script>
+      var settings = {
+        #port: 1884,
+        port: 9001,
+      };
+      var client = mqtt.connect(settings);
+      client.subscribe("object_detection");
+      client.on("message", function(topic, payload) {
+        console.log([topic, payload].join(": "));
+        document.getElementById('message').innerHTML = payload + '<br/>';
+      });
+    </script>
+</html>

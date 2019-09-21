@@ -24,3 +24,4 @@ docker run -d --net host tf-inference-visual
 
 ## use docker
 docker pull braveyuyong/visual_rtsp:0.1
+docker run -d --net host braveyuyong/visual_rtsp:0.1
